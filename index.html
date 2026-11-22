@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Laboratório de Padrões, um aplicativo de Matemática Pura para a Educação Básica com jogos e investigações interativas.">
+<title>Laboratório de Padrões · Início</title>
+<meta name="theme-color" content="#102c28">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icone-192.png">
+<script src="app.js" defer></script>
+<link rel="stylesheet" href="inicio.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<header>
+<div class="wrap top">
+<a class="brand" href="index.html" aria-current="page"><span aria-hidden="true">∴</span> Laboratório de Padrões</a>
+<nav aria-label="Navegação da página inicial">
+<a href="#objetivo">Objetivo</a><a href="#instalar">Instalar</a><a href="#atividades">Atividades</a><a href="#creditos">Autoria e IAGs</a>
+</nav>
+</div>
+</header>
+<main id="conteudo" class="wrap">
+<section class="hero" aria-labelledby="titulo">
+<div>
+<p class="eyebrow">Matemática Pura na Educação Básica</p>
+<h1 id="titulo">Laboratório<br>de Padrões</h1>
+<p class="lead">O que as jogadas mudam? O que elas conservam? Experimente, formule uma conjectura e descubra como justificá-la.</p>
+<a class="primary" href="#atividades">Explorar atividades</a>
+</div>
+<div class="illustration" aria-hidden="true">
+<div class="puzzle"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>8</span><span>7</span><span></span></div>
+</div>
+</section>
+<section id="objetivo" class="objective" aria-labelledby="objetivo-titulo">
+<h2 id="objetivo-titulo">Objetivo</h2>
+<p>Aproximar estudantes da Educação Básica de ideias da Matemática Pura por meio de jogos e investigações interativas. Em cada atividade, o estudante manipula objetos matemáticos, identifica padrões, formula conjecturas e constrói justificativas. O aplicativo foi pensado para os anos finais do Ensino Fundamental, com aprofundamentos que também podem ser explorados no Ensino Médio.</p>
+</section>
+<section id="atividades" class="activities" aria-labelledby="atividades-titulo">
+<h2 id="atividades-titulo">Atividades</h2>
+<div class="module-grid">
+<a class="module" href="explorar.html#numeros"><strong>Números e divisibilidade</strong><span>Organize pontos em fileiras e investigue divisores e números primos.</span></a>
+<a class="module" href="explorar.html#simetrias"><strong>Simetrias</strong><span>Gire e reflita figuras para descobrir quais transformações as preservam.</span></a>
+<a class="module" href="explorar.html#grafos"><strong>Grafos e caminhos</strong><span>Percorra redes sem repetir arestas e use os graus para explicar o resultado.</span></a>
+<a class="module" href="jogos.html"><strong>Jogos e invariantes</strong><span>Explore tabuleiros de 3 × 3 a 5 × 5 e explique por que algumas posições são impossíveis.</span></a>
+<a class="module" href="fundamentos.html"><strong>Fundamentos</strong><span>Investigue equações, permutações, restos, estratégias de jogo e coberturas com dominós.</span></a>
+</div>
+</section>
+<section id="instalar" class="objective" aria-labelledby="instalar-titulo">
+<h2 id="instalar-titulo">Instalar o aplicativo</h2>
+<div>
+<p>No Android, procure <strong>Instalar aplicativo</strong> ou <strong>Adicionar à tela inicial</strong> no menu do navegador. No iPhone, abra no Safari, toque em <strong>Compartilhar</strong> e escolha <strong>Adicionar à Tela de Início</strong>.</p>
+<button id="install-app" class="primary" type="button" hidden>Instalar aplicativo</button>
+<p id="offline-status" class="offline-status" role="status">Para usar as atividades sem internet, abra o laboratório primeiro com conexão.</p>
+</div>
+</section>
+<section id="creditos" class="credits" aria-label="Créditos do projeto">
+<div>
+<h2>Autoria</h2>
+<p><strong>Peterson Luiz do Nascimento da Silva</strong><br>Concepção e direção do projeto.</p>
+</div>
+<div>
+<h2>Declaração de uso de IAGs</h2>
+<p>O ChatGPT, da OpenAI, foi usado como ferramenta de inteligência artificial generativa (IAG) para apoiar a redação e a organização dos textos, a elaboração das atividades e de suas explicações matemáticas, a implementação da interface e do código e os testes de funcionamento. A concepção e a direção pedagógica do projeto são atribuídas ao autor identificado nesta página.</p>
+</div>
+</section>
+</main>
+</body>
+</html>

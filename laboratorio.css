@@ -1,0 +1,27 @@
+.modules{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;border:0;padding:0}
+.modules a{display:inline-flex;align-items:center;min-height:44px;padding:7px 12px;background:white;color:#173c35;border:1px solid #a5b8ad;border-radius:10px;text-decoration:none;font-weight:700}
+.modules a[aria-current=page]{background:#173c35;color:white}
+.modules a:hover{text-decoration:underline}
+.modules a:focus-visible{outline:3px solid #cc680f;outline-offset:3px}
+.experiment{display:grid;gap:16px}
+.experiment label{margin:0}
+select,input[type=number]{font:inherit;border:1px solid #758b80;border-radius:8px;padding:7px;color:#102522;background:white}
+input[type=number]{width:6em}
+.points{display:grid;justify-content:start;gap:clamp(3px,1vw,8px);padding:14px;background:#0d2723;border-radius:12px}
+.dot{display:block;width:clamp(5px,1.5vw,14px);aspect-ratio:1;background:#cbf686;border-radius:50%}
+.dot.extra{background:#ffc18a}
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0;min-width:0}
+canvas{display:block;width:100%;height:auto;border-radius:12px;background:#0d2723}
+figcaption{margin-top:5px}
+.experiment .status{min-height:0;margin:0}
+.dot{width:100%;max-width:14px}
+#board button{min-width:0;font-size:clamp(1rem,4.6vw,2rem)}
+.lab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,390px),1fr));gap:20px;align-items:start}.lab-grid h2,.lab-grid p,.lab-grid ol{margin:0}.display{display:block;background:#eaf5d8;border-radius:10px;padding:10px 14px;font-weight:750;font-variant-numeric:tabular-nums}.lab-grid a{color:#164b3c}
+#domino-board{display:grid;gap:3px;width:min(100%,300px)}
+#domino-board button{padding:0;min-height:0;aspect-ratio:1;border-radius:5px}
+#domino-board .light{background:#f0eed5;color:#152b23}
+#domino-board .dark{background:#22483e;color:white}
+#domino-board .removed{visibility:hidden}
+#domino-board .covered{background:#a3d875;color:#162414;opacity:1}
+#domino-board [aria-pressed=true]{outline:3px solid #bc5a00;outline-offset:-4px}

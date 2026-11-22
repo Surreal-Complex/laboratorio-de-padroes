@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investigações · Laboratório de Padrões</title>
+<meta name="theme-color" content="#102c28">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icone-192.png">
+<script src="app.js" defer></script>
+<link rel="stylesheet" href="laboratorio.css">
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#102522;background:#edf3ee}*{box-sizing:border-box}body{margin:0}header{background:#102c28;color:#f5fff5}header div,main{max-width:1120px;margin:auto;padding:clamp(16px,4vw,40px)}header div{padding-block:18px;font-weight:750}header span{color:#bff277;margin-right:10px}h1{font-size:clamp(2rem,5vw,3.7rem);line-height:1;letter-spacing:-.05em;margin:8px 0 14px}h2{line-height:1.18;margin-top:0}p{margin:0 0 14px}.intro{color:#36514a;margin-bottom:24px}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}.card{padding:clamp(16px,3vw,28px);border-radius:24px;background:white;border:1px solid #cedbd1}.play{background:#173c35;color:#f2fff5;border-color:#173c35}button{font:inherit;cursor:pointer;min-height:44px;border:1px solid #94aa9f;background:white;color:#10352d;border-radius:10px;padding:7px 12px;font-weight:700}button:disabled{opacity:.58;cursor:default}button:focus-visible,summary:focus-visible,textarea:focus-visible{outline:3px solid #cc680f;outline-offset:4px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}details{border-top:1px solid #cedbd1;padding:10px 0}summary{cursor:pointer;font-weight:750}details p{margin:10px 0}textarea{display:block;width:100%;min-height:90px;padding:10px;margin:7px 0 14px;font:inherit;border:1px solid #758b80;border-radius:10px;resize:vertical}label{font-weight:700}[hidden]{display:none!important}@media(max-width:720px){.layout{grid-template-columns:1fr}}
+</style>
+<header><div><span aria-hidden="true">∴</span>Laboratório de Padrões</div></header>
+<main>
+<nav class="modules" aria-label="Módulos do laboratório">
+<a href="index.html">Início</a>
+<a href="#numeros">Números e divisibilidade</a>
+<a href="#simetrias">Simetrias</a>
+<a href="#grafos">Grafos e caminhos</a>
+<a href="fundamentos.html">Fundamentos</a>
+<a href="jogos.html">Jogos e invariantes</a>
+</nav>
+<section id="numeros">
+<h1>Números e divisibilidade</h1>
+<p class="intro">Por que alguns números só formam retângulos com uma fileira, mesmo quando podemos girá-los?</p>
+<div class="layout">
+<section class="card play experiment">
+<h2>Forme retângulos</h2>
+<div class="row"><label for="total">Total de pontos</label><input id="total" type="number" min="2" max="60" value="12"></div>
+<div class="row"><label for="columns">Pontos por fileira</label><select id="columns"></select></div>
+<div id="points" class="points" aria-hidden="true"></div>
+<p id="division" class="status" role="status"></p>
+</section>
+<section class="card">
+<h2>Investigue</h2>
+<p>Organize 12 pontos de dois jeitos sem sobrar nenhum. Depois tente com 13. Considere iguais os retângulos que só diferem por um giro.</p>
+<label for="note-numeros">Que relação você percebeu entre um retângulo completo e os divisores do total?</label>
+<textarea id="note-numeros" data-note></textarea>
+<details><summary>Pista</summary><p>Se há 12 pontos e cada fileira tem 5, cabem duas fileiras completas e sobram 2 pontos. O que acontece quando usamos 3 por fileira?</p></details>
+<details><summary>Explicação</summary><p>Um retângulo completo com r fileiras e c pontos por fileira usa r × c pontos. Para formar um retângulo com mais de uma fileira e mais de uma coluna, ambos os fatores precisam ser maiores que 1. Um número primo só tem os divisores positivos 1 e ele próprio, por isso seus retângulos têm uma única fileira, possivelmente girada. Em 12, por exemplo, 3 × 4 funciona. Em 13, só 1 × 13 e 13 × 1 funcionam.</p></details>
+<details><summary>Para o professor</summary><p>Peça que a turma classifique os números de 2 a 20 e explique por que basta procurar fatores até a raiz quadrada do número.</p></details>
+</section>
+</div>
+</section>
+<section id="simetrias" hidden>
+<h1>Simetrias</h1>
+<p class="intro">Quais transformações fazem uma figura coincidir consigo mesma?</p>
+<div class="layout">
+<section class="card play experiment">
+<h2>Transforme a figura</h2>
+<div class="row"><label for="shape">Figura</label><select id="shape"><option value="square">Quadrado</option><option value="rectangle">Retângulo não quadrado</option><option value="flag">Bandeira assimétrica</option></select></div>
+<div class="comparison">
+<figure><canvas id="original" width="240" height="240" role="img" aria-label="Figura original"></canvas><figcaption>Original</figcaption></figure>
+<figure><canvas id="transformed" width="240" height="240" role="img" aria-label="Figura transformada"></canvas><figcaption>Transformada</figcaption></figure>
+</div>
+<div class="row"><button id="rotate">Girar 90°</button><button id="reflect">Refletir no eixo vertical</button><button id="reset-shape">Reiniciar</button></div>
+<p id="symmetry" class="status" role="status"></p>
+</section>
+<section class="card">
+<h2>Investigue</h2>
+<p>Teste um giro de 90°, depois outro, sem reiniciar. Compare o quadrado e o retângulo. Reinicie e teste uma reflexão. A linha tracejada marca o eixo vertical.</p>
+<label for="note-simetrias">Por que duas figuras podem ter algumas simetrias em comum e outras diferentes?</label>
+<textarea id="note-simetrias" data-note></textarea>
+<details><summary>Pista</summary><p>Depois de um quarto de volta, observe o que aconteceu com o lado mais comprido do retângulo. Depois de meia volta, compare novamente.</p></details>
+<details><summary>Explicação</summary><p>O quadrado coincide consigo mesmo nos giros de 0°, 90°, 180° e 270°. O retângulo não quadrado coincide nos giros de 0° e 180°. Ambos coincidem após uma reflexão vertical a partir da posição inicial. A bandeira foi desenhada para distinguir a posição inicial de qualquer outra transformação produzida pelos controles.</p></details>
+<details><summary>Para o professor</summary><p>Desafie a turma a produzir uma reflexão horizontal combinando o giro de 180° e a reflexão vertical. Peça uma justificativa usando a posição de um ponto da figura.</p></details>
+</section>
+</div>
+</section>
+<section id="grafos" hidden>
+<h1>Grafos e caminhos</h1>
+<p class="intro">O que a quantidade de ligações em cada vértice revela sobre a possibilidade de percorrer todas as arestas uma só vez?</p>
+<div class="layout">
+<section class="card play experiment">
+<h2>Percorra a rede</h2>
+<div class="row"><label for="network">Rede</label><select id="network"><option value="0">Circuito de quatro vértices</option><option value="1">Circuito com uma diagonal</option><option value="2">Circuito com duas diagonais</option><option value="3">Rede com cinco vértices</option><option value="4">Dois circuitos unidos</option></select></div>
+<canvas id="graph" width="480" height="300" role="img" aria-label="Rede de vértices e arestas"></canvas>
+<p class="status" id="edges"></p>
+<div class="row" id="vertices" aria-label="Vértices"></div>
+<div class="row"><button id="undo">Desfazer</button><button id="reset-graph">Reiniciar percurso</button></div>
+<p id="route" class="status" role="status"></p>
+<p id="degrees" class="status"></p>
+</section>
+<section class="card">
+<h2>Investigue</h2>
+<p>Escolha um vértice inicial e avance para um vizinho por uma aresta que ainda não foi usada. Na rede com uma diagonal, compare começar em A e começar em B. Depois, tente a rede com duas diagonais. O grau de um vértice é a quantidade de arestas ligadas a ele.</p>
+<label for="note-grafos">Como o grau ajuda a escolher onde começar? Quando o percurso pode terminar no ponto de partida?</label>
+<textarea id="note-grafos" data-note></textarea>
+<details><summary>Pista</summary><p>Em um vértice intermediário, cada chegada precisa ser acompanhada de uma saída. Em quais vértices uma chegada ou saída pode ficar sem par?</p></details>
+<details><summary>Explicação</summary><p>Em uma rede conexa como as três desta atividade, um percurso que usa cada aresta exatamente uma vez existe quando há zero ou dois vértices de grau ímpar. Com zero, o percurso pode começar e terminar no mesmo vértice. Com dois, eles precisam ser o início e o fim. Com quatro, o percurso é impossível, pois cada vértice de grau ímpar precisaria ser uma extremidade.</p></details>
+<details><summary>Aprofundamento · por que a condição é suficiente?</summary><p>Se todos os graus são pares, comece a caminhar por arestas novas. Ao chegar a um vértice diferente do inicial, a chegada deixa pelo menos uma saída disponível, por causa da paridade. Assim, o primeiro percurso que não pode prosseguir fecha no início. Se sobraram arestas, a conexidade garante um vértice desse circuito ligado a uma aresta ainda não usada. A partir dele, construa outro circuito com as sobras e encaixe-o no anterior. Repita até usar todas as arestas. Se há exatamente dois vértices ímpares, acrescente temporariamente uma aresta entre eles, mesmo que já exista uma ligação. Construa um circuito e remova a aresta extra para abrir o percurso entre os dois vértices.</p></details>
+<details><summary>Para o professor</summary><p>Peça à turma que compare o efeito de acrescentar a primeira e a segunda diagonal. Em cada caso, localizem os dois vértices cujo grau mudou e expliquem por que a paridade deles foi invertida.</p></details>
+</section>
+</div>
+</section>
+</main>
+<script src="explorar.js"></script>
+</html>

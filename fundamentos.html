@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fundamentos · Laboratório de Padrões</title>
+<meta name="theme-color" content="#102c28">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icone-192.png">
+<script src="app.js" defer></script>
+<link rel="stylesheet" href="laboratorio.css">
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#102522;background:#edf3ee}*{box-sizing:border-box}body{margin:0}header{background:#102c28;color:#f5fff5}header div,main{max-width:1120px;margin:auto;padding:clamp(16px,4vw,40px)}header div{padding-block:18px;font-weight:750}header span{color:#bff277;margin-right:10px}h1{font-size:clamp(2rem,5vw,3.7rem);line-height:1;letter-spacing:-.05em;margin:8px 0 14px}h2{line-height:1.18;margin-top:0}p{margin:0 0 14px}.intro{color:#36514a;margin-bottom:24px}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}.card{padding:clamp(16px,3vw,28px);border-radius:24px;background:white;border:1px solid #cedbd1}.play{background:#173c35;color:#f2fff5;border-color:#173c35}button{font:inherit;cursor:pointer;min-height:44px;border:1px solid #94aa9f;background:white;color:#10352d;border-radius:10px;padding:7px 12px;font-weight:700}button:disabled{opacity:.58;cursor:default}button:focus-visible,summary:focus-visible,textarea:focus-visible{outline:3px solid #cc680f;outline-offset:4px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}details{border-top:1px solid #cedbd1;padding:10px 0}summary{cursor:pointer;font-weight:750}details p{margin:10px 0}textarea{display:block;width:100%;min-height:90px;padding:10px;margin:7px 0 14px;font:inherit;border:1px solid #758b80;border-radius:10px;resize:vertical}label{font-weight:700}[hidden]{display:none!important}@media(max-width:720px){.layout{grid-template-columns:1fr}}
+</style>
+<header><div><span aria-hidden="true">∴</span>Laboratório de Padrões</div></header>
+<main>
+<nav class="modules" aria-label="Módulos do laboratório">
+<a href="index.html">Início</a>
+<a href="explorar.html#numeros">Números e divisibilidade</a>
+<a href="explorar.html#simetrias">Simetrias</a>
+<a href="explorar.html#grafos">Grafos e caminhos</a>
+<a href="fundamentos.html" aria-current="page">Fundamentos</a>
+<a href="jogos.html">Jogos e invariantes</a>
+</nav>
+<h1>Fundamentos da Matemática Pura</h1>
+<p class="intro">Experimente uma regra, observe o que ela preserva e abra a explicação para conferir sua conjectura.</p>
+<nav class="modules" aria-label="Atividades de fundamentos">
+<a href="#algebra">Álgebra</a><a href="#grupos">Grupos</a><a href="#numeros">Teoria dos Números</a><a href="#jogos">Teoria dos Jogos</a><a href="#dominos">Dominós e invariantes</a>
+</nav>
+<div class="lab-grid">
+<section class="card experiment" id="algebra">
+<h2>Álgebra · Equações equivalentes</h2>
+<p>Isole x aplicando a mesma operação aos dois membros da equação. O desafio termina quando aparece x = um número.</p>
+<div class="row"><label for="equation">Equação</label><select id="equation"><option value="0">2x + 6 = 14</option><option value="1">3x − 9 = 12</option><option value="2">4x + 8 = −4</option></select></div>
+<output class="display" id="balance" aria-live="polite"></output>
+<div class="row"><label for="operand">Número</label><input id="operand" type="number" min="-12" max="12" value="6"></div>
+<div class="row"><button data-op="add">Somar</button><button data-op="subtract">Subtrair</button><button data-op="divide">Dividir</button><button id="reset-equation">Reiniciar</button></div>
+<p class="status" id="equation-status" role="status"></p>
+<details><summary>Por que as soluções se conservam?</summary><p>Somar ou subtrair o mesmo número nos dois membros preserva a igualdade nos dois sentidos: basta aplicar a operação inversa. Dividir pelo mesmo número não nulo também é reversível, por multiplicação. Neste jogo, só entram divisões que mantêm os coeficientes inteiros. Por exemplo, em 2x + 6 = 14, subtraia 6 e depois divida por 2 para obter x = 4.</p></details>
+</section>
+<section class="card experiment" id="grupos">
+<h2>Grupos · Permutações de três objetos</h2>
+<p>Troque posições vizinhas. Compare aplicar 1↔2 e depois 2↔3 com aplicar as mesmas trocas na ordem inversa.</p>
+<output class="display" id="permutation" aria-live="polite"></output>
+<div class="row"><button id="swap12">Trocar 1ª e 2ª</button><button id="swap23">Trocar 2ª e 3ª</button><button id="undo-swap">Desfazer</button><button id="reset-permutation">Voltar à identidade</button></div>
+<p class="status" id="group-status" role="status"></p>
+<details><summary>O que faz de S₃ um grupo?</summary><p>As seis permutações de três posições, com a composição, formam S₃. A composição de duas permutações é uma permutação. Compor é associativo. A identidade mantém as posições e toda permutação possui inversa, obtida desfazendo suas trocas em ordem reversa. As duas trocas disponíveis geram as seis permutações. A partir de ABC, a primeira ordem produz BCA e a segunda produz CAB. Portanto a composição não é comutativa.</p></details>
+<details><summary>Ligação com os tabuleiros</summary><p>Uma troca de vizinhos alterna a paridade das inversões. No tabuleiro, as trocas são restritas à peça vizinha do vazio. Essas restrições permitem usar a paridade para demonstrar impossibilidades.</p></details>
+</section>
+<section class="card experiment" id="numeros">
+<h2>Teoria dos Números · Restos e MDC</h2>
+<p>Escolha dois inteiros positivos. A cada passo, substitua o par (a, b) por (b, resto de a por b).</p>
+<div class="row"><label for="euclid-a">Primeiro</label><input id="euclid-a" type="number" min="1" max="9999" value="84"><label for="euclid-b">Segundo</label><input id="euclid-b" type="number" min="1" max="9999" value="30"></div>
+<div class="row"><button id="start-euclid">Começar</button><button id="step-euclid">Calcular próximo resto</button></div>
+<ol id="divisions"></ol>
+<p class="display" id="euclid-status" role="status"></p>
+<details><summary>Por que o algoritmo de Euclides funciona?</summary><p>Se a = qb + r, qualquer divisor comum de a e b divide r = a − qb. Qualquer divisor comum de b e r também divide a = qb + r. Os pares têm os mesmos divisores comuns. Como os restos diminuem enquanto são positivos, o algoritmo termina em zero. O último divisor positivo é o MDC. A igualdade a ≡ r (mod b) indica que b divide a − r.</p></details>
+</section>
+<section class="card experiment" id="jogos">
+<h2>Teoria dos Jogos · Jogo das fichas</h2>
+<p>Você começa. Cada jogador retira 1, 2 ou 3 fichas. Quem tirar a última vence. O computador sempre escolhe uma jogada vencedora quando existe uma.</p>
+<div class="row"><label for="pile">Posição inicial</label><select id="pile"><option value="7">7 fichas</option><option value="12">12 fichas</option><option value="17">17 fichas</option><option value="24">24 fichas</option></select><button id="reset-pile">Reiniciar</button></div>
+<output class="display" id="remaining" aria-live="polite"></output>
+<div class="row"><button data-take="1">Tirar 1</button><button data-take="2">Tirar 2</button><button data-take="3">Tirar 3</button></div>
+<p class="status" role="status" id="pile-status"></p>
+<details><summary>Posições vencedoras e perdedoras</summary><p>Quem recebe 0 fichas já perdeu. De um múltiplo positivo de 4, qualquer retirada permitida deixa um número que não é múltiplo de 4. De qualquer outro número, retirar o resto da divisão por 4 deixa um múltiplo. Assim, se você entregar um múltiplo de 4, pode responder à retirada k do adversário com 4 − k, até retirar a última ficha. Com 12 ou 24 fichas, a vitória inicial é impossível contra um adversário perfeito. Ela ainda pode ocorrer se o adversário errar.</p></details>
+</section>
+<section class="card experiment" id="dominos">
+<h2>Dominós · O tabuleiro com cantos removidos</h2>
+<p>Selecione duas casas vizinhas para colocar um dominó. Tente cobrir todas as casas de cada tabuleiro. O padrão quadriculado é a pista.</p>
+<div class="row"><label for="domino-case">Tabuleiro</label><select id="domino-case"><option value="full">4 × 4 completo</option><option value="cut">4 × 4 sem cantos opostos</option><option value="large">6 × 6 sem cantos opostos</option></select><button id="reset-domino">Reiniciar</button><button id="undo-domino">Desfazer</button></div>
+<div id="domino-board" role="group" aria-label="Tabuleiro de dominós"></div>
+<p class="status" id="domino-status" role="status"></p>
+<details><summary>Por que certas coberturas são impossíveis?</summary><p>Cada dominó cobre exatamente uma casa clara e uma escura, pois casas vizinhas têm cores opostas. Em um tabuleiro quadrado de lado par, dois cantos diagonalmente opostos têm a mesma cor. Retirá-los deixa duas casas a menos daquela cor. Assim, nenhuma cobertura por dominós pode completar esses tabuleiros. No tabuleiro completo, uma cobertura possível é emparelhar casas consecutivas em cada linha.</p></details>
+</section>
+<section class="card experiment" id="grafostext">
+<h2>Teoria de Grafos · A soma dos graus</h2>
+<p>No simulador, compare a soma dos graus antes e depois de acrescentar uma diagonal. O que acontece quando você soma os graus da rede com duas diagonais?</p>
+<p><a href="explorar.html#grafos">Experimentar nas redes</a></p>
+<details><summary>Lema do aperto de mãos</summary><p>Cada aresta contribui uma unidade para o grau de cada extremidade. Portanto a soma dos graus é duas vezes a quantidade de arestas. Como a soma é par, a quantidade de vértices de grau ímpar também é par. Na rede com duas diagonais, os quatro graus valem 3 e a soma 12 corresponde a seis arestas.</p></details>
+<details><summary>Ligação com os percursos</summary><p>Em um percurso que usa cada aresta uma vez, as chegadas e saídas se emparelham nos vértices intermediários. Apenas as duas extremidades de um percurso aberto podem ter grau ímpar. A rede com quatro vértices ímpares não admite esse percurso.</p></details>
+</section>
+</div>
+</main>
+<script src="fundamentos.js"></script>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laboratório de Padrões</title>
+<meta name="theme-color" content="#102c28">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icone-192.png">
+<script src="app.js" defer></script>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#102522;background:#edf3ee}*{box-sizing:border-box}body{margin:0}header{background:#102c28;color:#f5fff5}header div,main{max-width:1120px;margin:auto;padding:clamp(16px,4vw,40px)}header div{padding-block:18px;font-weight:750;letter-spacing:.03em}header span{color:#bff277;margin-right:10px}h1{font-size:clamp(2.3rem,6vw,4.5rem);line-height:1;letter-spacing:-.065em;margin:8px 0 16px;max-width:14ch}h2,h3{line-height:1.16}p{margin:0 0 14px}.intro{margin-bottom:26px;color:#36514a}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}.card{padding:clamp(16px,3vw,28px);border-radius:24px;background:white;border:1px solid #cedbd1}.play{background:#173c35;color:#f2fff5;border-color:#173c35}.play h2{margin-top:0}button,textarea{font:inherit}button{cursor:pointer;border:1px solid #94aa9f;background:white;color:#10352d;border-radius:10px;padding:8px 12px;font-weight:700}button[aria-pressed=true]{background:#cbf686;border-color:#cbf686;color:#203a1f}button:focus-visible,summary:focus-visible,textarea:focus-visible{outline:3px solid #cc680f;outline-offset:4px}.row{display:flex;flex-wrap:wrap;gap:8px}.board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px;background:#0d2723;border-radius:18px;max-width:345px;margin:20px auto}.tile{aspect-ratio:1;padding:0;border:0;background:#e4eee7;font-size:clamp(1.6rem,4vw,2.6rem);border-radius:12px}.tile.movable{background:#cbf686}.tile.empty{background:#254940;border:2px dashed #58746b;color:transparent}.status{min-height:3em;margin-top:10px}.chip{font-weight:750;color:#527334;margin:0}.metrics{background:#eaf5d8;padding:12px;border-radius:12px;margin:12px 0;overflow-wrap:anywhere}nav{border-bottom:1px solid #cedbd1;padding-bottom:12px}details{border-top:1px solid #cedbd1;padding:10px 0}summary{cursor:pointer;font-weight:750}details p{margin-top:10px}textarea{width:100%;min-height:110px;padding:10px;border-radius:10px;border:1px solid #758b80;resize:vertical}label{display:block;font-weight:700;margin-bottom:6px}.teacher{margin-top:20px}.teacher details{border:0;padding:0}.teacher li{margin-bottom:8px}[hidden]{display:none!important}@media(max-width:720px){.layout{grid-template-columns:1fr}}
+</style>
+<link rel="stylesheet" href="laboratorio.css">
+<header><div><span aria-hidden="true">∴</span> Laboratório de Padrões</div></header>
+<main>
+<nav class="modules" aria-label="Módulos do laboratório">
+<a href="index.html">Início</a>
+<a href="explorar.html#numeros">Números e divisibilidade</a>
+<a href="explorar.html#simetrias">Simetrias</a>
+<a href="explorar.html#grafos">Grafos e caminhos</a>
+<a href="fundamentos.html">Fundamentos</a>
+<a href="jogos.html" aria-current="page">Jogos e invariantes</a>
+</nav>
+<p class="chip">Jogos e invariantes</p>
+<h1>O mistério das peças trocadas</h1>
+<p class="intro">Três tamanhos, uma mesma regra. Quais posições podem chegar à meta por movimentos válidos?</p>
+<div class="layout">
+<section class="card play" aria-labelledby="board-title">
+<h2 id="board-title">Tabuleiro deslizante</h2>
+<div class="row">
+<label for="size">Tamanho</label><select id="size"><option value="3">3 × 3</option><option value="4">4 × 4</option><option value="5">5 × 5</option></select>
+<label for="level">Nível</label><select id="level"><option value="a">A · Introdução</option><option value="medium">Intermediário</option><option value="hard">Avançado</option><option value="b">B · Peças trocadas</option></select>
+</div>
+<div class="board" id="board" role="group"></div>
+<p id="goal-text"></p>
+<p>Toque em uma peça vizinha do vazio ou use as setas enquanto o foco estiver no tabuleiro. As setas movem o espaço vazio.</p>
+<div class="row"><button id="reset">Reiniciar desafio</button><span id="moves"></span></div>
+<p class="status" id="status" role="status"></p>
+</section>
+<section class="card" aria-label="Roteiro da investigação">
+<nav class="row" aria-label="Etapas"><button data-stage="jogar" aria-pressed="true">Jogar</button><button data-stage="investigar" aria-pressed="false">Investigar</button><button data-stage="explicar" aria-pressed="false">Explicar</button></nav>
+<div id="jogar">
+<h2>Você consegue resolver os dois?</h2>
+<p>Comece pelo nível A. Depois, escolha o nível B e compare as duas últimas peças numeradas com a meta. Repita a investigação em 4 × 4 e 5 × 5.</p>
+<p>Se você ficar preso no desafio B, pense no que poderia distinguir uma tarefa difícil de uma tarefa impossível.</p>
+<button data-next="investigar">Começar a investigação</button>
+</div>
+<div id="investigar" hidden>
+<h2>O que muda a cada movimento?</h2>
+<p>Leia as peças linha por linha, ignorando o vazio. Uma <strong>inversão</strong> é um par em que o número maior aparece antes do menor. Na sequência 1, 3, 2, por exemplo, há uma inversão: (3, 2).</p>
+<button id="reveal" aria-expanded="false" aria-controls="metrics">Mostrar inversões</button>
+<div id="metrics" class="metrics" hidden><div id="counts"></div><div id="invariant"></div><div id="pairs"></div></div>
+<p>Faça um movimento horizontal e depois um vertical. Compare as contagens e procure algo que permanece.</p>
+<details><summary>Pista sobre o movimento horizontal</summary><p>Escreva a sequência antes e depois. Ignorando o vazio, algum par de peças numéricas mudou de ordem?</p></details>
+<details><summary>Pista sobre o movimento vertical</summary><p>Na ordem de leitura, quantas peças numeradas a peça movida atravessa? Compare a quantidade de peças atravessadas nos tabuleiros de larguras 3, 4 e 5.</p></details>
+<button data-next="explicar">Registrar minha explicação</button>
+</div>
+<div id="explicar" hidden>
+<h2>Escreva sua justificativa</h2>
+<label for="notes">Que propriedade permanece neste tamanho e o que ela diz sobre o nível B?</label>
+<textarea id="notes" placeholder="Minha conjectura é que…"></textarea>
+<p id="saved" role="status">O registro fica neste navegador quando o armazenamento local está disponível.</p>
+<details><summary>Abrir a demonstração comentada</summary>
+<p>Em qualquer tamanho, um movimento horizontal mantém a ordem dos números. Num movimento vertical em um tabuleiro de largura n, a peça cruza n − 1 peças na leitura. Cada cruzamento altera a contagem de inversões em +1 ou −1.</p>
+<p><strong>3 × 3 e 5 × 5.</strong> A peça cruza duas ou quatro outras numa jogada vertical. Como esse número é par, a paridade da contagem de inversões se conserva.</p>
+<p><strong>4 × 4.</strong> A peça cruza três outras numa jogada vertical. A paridade das inversões muda e a do número da linha do vazio, contado de baixo para cima a partir de 1, também muda. Portanto a paridade da soma se conserva. Um movimento horizontal mantém os dois termos.</p>
+<p id="impossible-proof"></p>
+</details>
+<details><summary>Conexão com permutações</summary><p>Cada jogada troca duas posições, a da peça e a do vazio. Contando o vazio como uma peça, toda jogada alterna a paridade da permutação e a cor da casa do vazio em um tabuleiro quadriculado. Essas duas alternâncias se compensam. Trocar as duas últimas peças numeradas muda somente a paridade da permutação. Explore a composição de trocas no <a href="fundamentos.html#grupos">módulo de grupos</a>.</p></details>
+</div>
+</section>
+</div>
+<section class="card teacher">
+<details><summary>Guia para o professor</summary>
+<p><strong>Público e duração sugeridos</strong> · Anos finais do Ensino Fundamental, com aprofundamento para o Ensino Médio. Reserve 25 a 35 minutos.</p>
+<ol><li>Deixe a turma experimentar os dois desafios em duplas.</li><li>Peça que anotem a contagem antes e depois de um movimento de cada tipo. Pergunte se mudar a contagem obriga a mudar a paridade.</li><li>Peça uma justificativa que valha para qualquer sequência de movimentos. Compare a justificativa com a demonstração comentada.</li></ol>
+<p>Na EIMat, a investigação pode começar com um tabuleiro físico 3 × 3 e continuar no aplicativo com a contagem de inversões.</p>
+</details>
+</section>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const storageKey = 'laboratorio-padroes-v2';
+let state = { size:3, level:'a', games:{}, notes:{} };
+try {
+  const saved = JSON.parse(localStorage.getItem(storageKey));
+  if (saved) state = saved;
+  else {
+    const legacy = JSON.parse(localStorage.getItem('laboratorio-padroes-v1'));
+    if (legacy?.games?.length === 2) {
+      state.level = legacy.selected === 1 ? 'b' : 'a';
+      state.games = {'3-a':legacy.games[0], '3-b':legacy.games[1]};
+      state.notes[3] = legacy.notes;
+    }
+  }
+} catch {}
+function save() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  } catch {
+    $('saved').textContent = 'Este navegador não conseguiu guardar o progresso.';
+  }
+}
+const size = () => state.size;
+const key = () => size() + '-' + state.level;
+const goal = () => Array.from({length:size() ** 2}, (_,i) => (i + 1) % (size() ** 2));
+let initialTiles = [];
+function adjacent(a,b) {
+  const n = size();
+  return Math.abs(Math.floor(a / n) - Math.floor(b / n)) + Math.abs(a % n - b % n) === 1;
+}
+function start() {
+  const values = goal();
+  const last = values.length - 1;
+  if (state.level === 'b') {
+    [values[last-2], values[last-1]] = [values[last-1], values[last-2]];
+    return values;
+  }
+  if (size() === 3 && state.level === 'a') return [1,2,3,7,4,6,0,5,8];
+  // Each starting position is produced by legal moves from the goal.
+  const steps = {a:4, medium:11, hard:23}[state.level];
+  let space = last;
+  let previous = -1;
+  let seed = size() * 271 + steps;
+  for (let j = 0; j < steps; j++) {
+    const options = values.map((_,i) => i).filter(i => i !== previous && adjacent(i,space));
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    const next = options[(seed >>> 12) % options.length];
+    [values[space], values[next]] = [values[next], values[space]];
+    previous = space;
+    space = next;
+  }
+  return values;
+}
+const game = () => state.games[key()];
+function inversions(tiles) {
+  const values = tiles.filter(Boolean);
+  return values.flatMap((a,i) => values.slice(i+1).filter(b => a>b).map(b => [a,b]));
+}
+const parity = n => n % 2 === 0 ? 'par' : 'ímpar';
+const solved = () => game().tiles.every((number,i) => number === (i + 1) % (size() ** 2));
+let tiles = [];
+function buildBoard() {
+  const board = $('board');
+  board.replaceChildren();
+  board.style.gridTemplateColumns = 'repeat(' + size() + ', minmax(0, 1fr))';
+  board.setAttribute('aria-label', 'Tabuleiro de ' + size() + ' por ' + size());
+  tiles = goal().map((_,i) => {
+    const tile = document.createElement('button');
+    tile.className = 'tile';
+    tile.addEventListener('click', () => move(i));
+    board.append(tile);
+    return tile;
+  });
+}
+function render() {
+  const {tiles: values, moves} = game();
+  const space = values.indexOf(0);
+  tiles.forEach((tile,i) => {
+    const number = values[i];
+    tile.textContent = number || '';
+    tile.classList.toggle('empty', !number);
+    tile.classList.toggle('movable', adjacent(i,space));
+    tile.setAttribute('aria-label', (number ? 'Peça ' + number : 'Espaço vazio') + ', linha ' + (Math.floor(i / size())+1) + ', coluna ' + (i%size()+1));
+    tile.setAttribute('aria-disabled', String(!adjacent(i,space)));
+  });
+  $('moves').textContent = moves + (moves === 1 ? ' movimento' : ' movimentos');
+  const initial = inversions(initialTiles).length;
+  const current = inversions(values);
+  $('counts').textContent = 'Início: ' + initial + ' (' + parity(initial) + ') · Agora: ' + current.length + ' (' + parity(current.length) + ') · Meta: 0 (par)';
+  const bottomRow = arrangement => size() - Math.floor(arrangement.indexOf(0) / size());
+  const evenWidth = size() % 2 === 0;
+  const row = bottomRow(values);
+  $('invariant').textContent = evenWidth
+    ? 'Linha do vazio a partir de baixo: ' + row + '. Paridade da soma (inversões + linha): início ' + parity(initial + bottomRow(initialTiles)) + ' · agora ' + parity(current.length + row) + ' · meta ímpar.'
+    : 'Invariante: paridade das inversões.';
+  $('pairs').textContent = current.length ? 'Pares invertidos: ' + current.map(pair => '(' + pair.join(', ') + ')').join(', ') : 'Nenhum par invertido.';
+}
+function move(i) {
+  const values = game().tiles;
+  const space = values.indexOf(0);
+  if (i < 0 || i >= values.length || !adjacent(i,space)) {
+    $('status').textContent = 'Escolha uma peça ao lado, acima ou abaixo do espaço vazio.';
+    return;
+  }
+  const piece = values[i];
+  [values[i],values[space]] = [values[space],values[i]];
+  game().moves++;
+  render();
+  $('status').textContent = solved() ? 'Tabuleiro resolvido!' : 'Peça ' + piece + ' movida.';
+  save();
+}
+$('board').addEventListener('keydown', event => {
+  const offsets = {ArrowLeft:-1,ArrowRight:1,ArrowUp:-size(),ArrowDown:size()};
+  if (!(event.key in offsets)) return;
+  event.preventDefault();
+  move(game().tiles.indexOf(0) + offsets[event.key]);
+});
+function selectGame() {
+  state.size = Number($('size').value);
+  state.level = $('level').value;
+  initialTiles = start();
+  state.games[key()] ??= {tiles:[...initialTiles], moves:0};
+  buildBoard();
+  const last = size() ** 2 - 1;
+  $('goal-text').textContent = 'Ordene as peças de 1 a ' + last + ' por linhas. Deixe o vazio no último espaço.';
+  const reason = size() % 2
+    ? 'O nível B tem uma inversão (ímpar) e a meta tem zero (par).'
+    : 'O nível B tem uma inversão e o vazio está na linha 1, dando soma 2 (par). A meta tem zero inversões e o vazio na linha 1, dando soma 1 (ímpar).';
+  $('impossible-proof').textContent = 'No ' + size() + ' × ' + size() + ', as peças ' + (last-1) + ' e ' + last + ' estão trocadas no nível B. ' + reason + ' Como a paridade do invariante é diferente, nenhuma sequência de jogadas pode chegar à meta.';
+  $('status').textContent = solved() ? 'Tabuleiro resolvido!' : '';
+  $('notes').value = state.notes[size()] ?? '';
+  render();
+}
+for (const id of ['size','level']) {
+  $(id).addEventListener('change', () => {
+    selectGame();
+    save();
+  });
+}
+$('reset').addEventListener('click', () => {
+  state.games[key()] = {tiles:[...initialTiles], moves:0};
+  $('status').textContent = 'Tabuleiro reiniciado.';
+  render();
+  save();
+});
+const stages = document.querySelectorAll('[data-stage]');
+function stage(name) {
+  stages.forEach(button => {
+    const active = button.dataset.stage === name;
+    button.setAttribute('aria-pressed', String(active));
+    $(button.dataset.stage).hidden = !active;
+  });
+}
+stages.forEach(button => button.addEventListener('click', () => stage(button.dataset.stage)));
+document.querySelectorAll('[data-next]').forEach(button => button.addEventListener('click', () => {
+  stage(button.dataset.next);
+  document.querySelector('[data-stage="' + button.dataset.next + '"]').focus();
+}));
+$('reveal').addEventListener('click', () => {
+  const metrics = $('metrics');
+  metrics.hidden = !metrics.hidden;
+  $('reveal').textContent = metrics.hidden ? 'Mostrar inversões' : 'Ocultar inversões';
+  $('reveal').setAttribute('aria-expanded', String(!metrics.hidden));
+});
+$('size').value = state.size;
+$('level').value = state.level;
+$('notes').addEventListener('input', () => {
+  state.notes[size()] = $('notes').value;
+  save();
+});
+selectGame();
+</script>
+</html>
