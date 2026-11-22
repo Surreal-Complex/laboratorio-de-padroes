@@ -8,23 +8,41 @@
 <link rel="icon" href="icone-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icone-192.png">
 <script src="app.js" defer></script>
+<script src="animacoes-dados.js" defer></script>
+<script src="interface.js" defer></script>
 <link rel="stylesheet" href="laboratorio.css">
 <style>
 :root{font:16px/1.55 system-ui,sans-serif;color:#102522;background:#edf3ee}*{box-sizing:border-box}body{margin:0}header{background:#102c28;color:#f5fff5}header div,main{max-width:1120px;margin:auto;padding:clamp(16px,4vw,40px)}header div{padding-block:18px;font-weight:750}header span{color:#bff277;margin-right:10px}h1{font-size:clamp(2rem,5vw,3.7rem);line-height:1;letter-spacing:-.05em;margin:8px 0 14px}h2{line-height:1.18;margin-top:0}p{margin:0 0 14px}.intro{color:#36514a;margin-bottom:24px}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}.card{padding:clamp(16px,3vw,28px);border-radius:24px;background:white;border:1px solid #cedbd1}.play{background:#173c35;color:#f2fff5;border-color:#173c35}button{font:inherit;cursor:pointer;min-height:44px;border:1px solid #94aa9f;background:white;color:#10352d;border-radius:10px;padding:7px 12px;font-weight:700}button:disabled{opacity:.58;cursor:default}button:focus-visible,summary:focus-visible,textarea:focus-visible{outline:3px solid #cc680f;outline-offset:4px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}details{border-top:1px solid #cedbd1;padding:10px 0}summary{cursor:pointer;font-weight:750}details p{margin:10px 0}textarea{display:block;width:100%;min-height:90px;padding:10px;margin:7px 0 14px;font:inherit;border:1px solid #758b80;border-radius:10px;resize:vertical}label{font-weight:700}[hidden]{display:none!important}@media(max-width:720px){.layout{grid-template-columns:1fr}}
 </style>
-<header><div><span aria-hidden="true">∴</span>Laboratório de Padrões</div></header>
-<main>
-<nav class="modules" aria-label="Módulos do laboratório">
+<link rel="stylesheet" href="interface.css">
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<header class="site-header">
+<div class="site-brand-row">
+<a class="site-brand" href="index.html"><span aria-hidden="true">∴</span> Laboratório de Padrões</a>
+<button type="button" id="abrir-menu" aria-controls="menu-lateral" aria-expanded="false">Menu</button>
+</div>
+<div class="site-tab-row">
+<nav class="modules site-tabs" id="navegacao" aria-label="Seções do laboratório">
 <a href="index.html">Início</a>
-<a href="trilhas.html">Trilhas e professor</a>
 <a href="explorar.html#numeros">Números e divisibilidade</a>
 <a href="explorar.html#simetrias">Simetrias</a>
 <a href="explorar.html#grafos">Grafos e caminhos</a>
-<a href="fundamentos.html" aria-current="page">Fundamentos</a>
 <a href="jogos.html">Jogos e invariantes</a>
+<a href="fundamentos.html" aria-current="page">Fundamentos</a>
+<a href="trilhas.html">Trilhas e professor</a>
 </nav>
-<h1>Fundamentos da Matemática Pura</h1>
-<p class="intro">Experimente uma regra, observe o que ela preserva e abra a explicação para conferir sua conjectura.</p>
+</div>
+<dialog id="menu-lateral" aria-labelledby="menu-titulo">
+<form method="dialog"><strong id="menu-titulo">Seções do laboratório</strong><button type="submit" autofocus>Fechar</button></form>
+<div class="destino-menu"></div>
+</dialog>
+</header>
+<main id="conteudo">
+<div class="math-heading"><div><h1>Fundamentos da Matemática Pura</h1>
+<p class="intro">Experimente uma regra, observe o que ela preserva e abra a explicação para conferir sua conjectura.</p></div><figure class="math-figure" data-animation="fundamentos">
+<canvas width="320" height="158" aria-hidden="true"></canvas>
+<figcaption><span>Seis permutações de três elementos</span><button type="button" aria-label="Animar ou pausar: Seis permutações de três elementos">Animar</button></figcaption>
+</figure></div>
 <nav class="modules" aria-label="Atividades de fundamentos">
 <a href="#algebra">Álgebra</a><a href="#grupos">Grupos</a><a href="#numeros">Teoria dos Números</a><a href="#jogos">Teoria dos Jogos</a><a href="#dominos">Dominós e invariantes</a>
 </nav>

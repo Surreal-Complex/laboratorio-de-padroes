@@ -2,11 +2,11 @@
 
 const scope = new URL(self.registration.scope);
 const cachePrefix = 'laboratorio-de-padroes:' + scope.pathname + ':';
-const cacheName = cachePrefix + 'v3';
+const cacheName = cachePrefix + 'v4';
 const assets = [
   './', 'index.html', 'explorar.html', 'fundamentos.html', 'jogos.html', 'trilhas.html',
   'inicio.css', 'laboratorio.css', 'explorar.js', 'fundamentos.js', 'app.js',
-  'manifest.webmanifest', 'icone-192.png', 'icone-512.png', 'trilhas.css', 'trilhas.js'
+  'manifest.webmanifest', 'icone-192.png', 'icone-512.png', 'trilhas.css', 'trilhas.js', 'interface.css', 'interface.js', 'animacoes-dados.js'
 ].map(path => new URL(path, scope).href);
 
 self.addEventListener('install', event => {

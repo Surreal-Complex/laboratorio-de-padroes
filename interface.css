@@ -1,0 +1,43 @@
+:root{--lab-ink:#102c28;--lab-green:#cbf686;--lab-line:#cedbd1}
+body{background-image:linear-gradient(#24483d08 1px,transparent 1px),linear-gradient(90deg,#24483d08 1px,transparent 1px);background-size:24px 24px}
+.site-header{background:var(--lab-ink);color:white;border-bottom:1px solid #43615a}
+.site-header .site-brand-row,.site-header .site-tab-row{max-width:1120px;margin:auto;padding:12px clamp(16px,4vw,40px);font-weight:inherit}
+.site-header .site-brand-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.site-header .site-tab-row{padding-top:0;padding-bottom:8px}
+.site-brand{color:white;text-decoration:none;font-weight:800}
+.site-header .site-brand span{color:var(--lab-green);font-size:1.35em;margin-right:6px}
+.site-header .site-tabs{display:flex;flex-wrap:wrap;gap:5px;margin:0;padding:0;border:0}
+.site-header .site-tabs a{background:transparent;color:#e8f5ec;border:1px solid transparent;border-radius:8px;min-height:44px;padding:5px 9px;font-size:.91rem;font-weight:650;text-decoration:none}
+.site-header .site-tabs a:hover{background:#284b42;color:white;text-decoration:none}
+.site-header .site-tabs a[aria-current="page"]{background:var(--lab-green);color:var(--lab-ink);border-color:var(--lab-green)}
+.site-header button,.math-figure button{font:inherit;font-weight:700;min-height:40px;padding:5px 10px;border:1px solid #719a92;border-radius:8px;background:transparent;color:#f4fff8;cursor:pointer}
+#abrir-menu,#menu-lateral:not([open]){display:none}
+#menu-lateral{position:fixed;inset:0 auto 0 0;margin:0;width:min(88vw,350px);max-width:none;height:100%;max-height:none;padding:16px;border:0;background:var(--lab-ink);color:white;overflow:auto}
+#menu-lateral::backdrop{background:#071b17b3}
+#menu-lateral form{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
+.site-header #menu-lateral .destino-menu{padding:0;margin:0}
+#menu-lateral .site-tabs{flex-direction:column}
+#menu-lateral .site-tabs a{width:100%}
+a:focus-visible,.site-header button:focus-visible,.math-figure button:focus-visible,.home-panel summary:focus-visible{outline:3px solid #d97724;outline-offset:3px}
+.skip{position:absolute;top:8px;left:8px;background:white;color:var(--lab-ink);padding:8px;transform:translateY(-170%);z-index:5}
+.skip:focus{transform:none}
+.math-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(215px,320px);align-items:center;gap:24px;margin:0 0 clamp(20px,4vw,32px)}
+.math-heading .intro{margin-bottom:0}
+.math-figure{margin:0;width:100%;min-width:0;background:#15372f;color:#f3fff8;border-radius:14px;overflow:hidden;border:1px solid #3b655b}
+.math-figure canvas{width:100%;height:auto;display:block;border-radius:0;background:#123229}
+.math-figure figcaption{margin:0;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;gap:8px;font:650 .84rem/1.35 ui-monospace,Consolas,monospace}
+.site-header .site-brand-row span{margin-inline-end:5px}
+.hero{padding:clamp(23px,5vw,50px);grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.hero h1{font-size:clamp(2.35rem,6vw,4.7rem);max-width:12ch}
+.home-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 18px;margin-top:18px}
+.home-actions .primary{margin-top:0}
+.home-panel{margin:12px 0 0;padding:0;background:white;border:1px solid var(--lab-line);border-radius:13px;scroll-margin-top:16px}
+.home-panel summary{padding:12px 16px;min-height:44px;cursor:pointer;font-weight:750}
+.home-panel summary::marker{color:#397255}
+.home-panel-body{padding:4px 16px 16px}
+.site-footer{display:grid;grid-template-columns:minmax(170px,1fr) minmax(0,2fr);gap:20px;padding:24px 0 34px;border-top:1px solid var(--lab-line);color:#36514a;font-size:.9rem}
+.site-footer h2{font-size:1rem;color:var(--lab-ink);margin:0 0 6px}
+.section-links{display:flex;gap:7px 15px;flex-wrap:wrap}
+@media(max-width:840px){.com-menu #abrir-menu{display:inline-block}.com-menu .site-header .site-tab-row{display:none}}
+@media(max-width:620px){.math-heading,.hero,.site-footer{grid-template-columns:1fr;gap:12px}.math-figure{max-width:320px}.hero .math-figure{max-width:270px}}
+@media print{.site-header,.site-footer,.math-heading,.section-links,.skip{display:none!important}}

@@ -11,17 +11,41 @@
 <link rel="stylesheet" href="inicio.css">
 <link rel="stylesheet" href="trilhas.css">
 <script src="app.js" defer></script>
+<script src="animacoes-dados.js" defer></script>
+<script src="interface.js" defer></script>
 <script src="trilhas.js" defer></script>
+<link rel="stylesheet" href="interface.css">
 </head>
 <body>
 <a class="skip" href="#conteudo">Ir para o conteúdo</a>
-<header><div class="wrap top">
-<a class="brand" href="index.html"><span aria-hidden="true">∴</span> Laboratório de Padrões</a>
-<nav aria-label="Navegação das trilhas"><a href="#percursos">Trilhas</a><a href="#desafios">Desafios</a><a href="#caderno">Caderno</a><a href="#professor">Professor</a></nav>
-</div></header>
+<header class="site-header">
+<div class="site-brand-row">
+<a class="site-brand" href="index.html"><span aria-hidden="true">∴</span> Laboratório de Padrões</a>
+<button type="button" id="abrir-menu" aria-controls="menu-lateral" aria-expanded="false">Menu</button>
+</div>
+<div class="site-tab-row">
+<nav class="modules site-tabs" id="navegacao" aria-label="Seções do laboratório">
+<a href="index.html">Início</a>
+<a href="explorar.html#numeros">Números e divisibilidade</a>
+<a href="explorar.html#simetrias">Simetrias</a>
+<a href="explorar.html#grafos">Grafos e caminhos</a>
+<a href="jogos.html">Jogos e invariantes</a>
+<a href="fundamentos.html">Fundamentos</a>
+<a href="trilhas.html" aria-current="page">Trilhas e professor</a>
+</nav>
+</div>
+<dialog id="menu-lateral" aria-labelledby="menu-titulo">
+<form method="dialog"><strong id="menu-titulo">Seções do laboratório</strong><button type="submit" autofocus>Fechar</button></form>
+<div class="destino-menu"></div>
+</dialog>
+</header>
 <main id="conteudo" class="wrap">
-<h1>Trilhas de investigação</h1>
-<p class="intro">Em cada etapa, teste exemplos, registre uma conjectura e procure um argumento que funcione em todos os casos. Marque as atividades que você concluiu.</p>
+<div class="math-heading"><div><h1>Trilhas de investigação</h1>
+<p class="intro">Em cada etapa, teste exemplos, registre uma conjectura e procure um argumento que funcione em todos os casos. Marque as atividades que você concluiu.</p></div><figure class="math-figure" data-animation="trilhas">
+<canvas width="320" height="158" aria-hidden="true"></canvas>
+<figcaption><span>Padrão de crescimento · aₙ = 4n + 1</span><button type="button" aria-label="Animar ou pausar: Padrão de crescimento · aₙ = 4n + 1">Animar</button></figcaption>
+</figure></div>
+<nav class="section-links" aria-label="Nesta página"><a href="#percursos">Trilhas</a><a href="#desafios">Desafios</a><a href="#caderno">Caderno</a><a href="#professor">Professor</a></nav>
 <section id="percursos" aria-labelledby="titulo-percursos">
 <h2 id="titulo-percursos">Escolha por onde começar</h2>
 <div class="routes">
