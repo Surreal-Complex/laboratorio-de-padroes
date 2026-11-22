@@ -25,27 +25,28 @@
 </nav>
 <p class="chip">Jogos e invariantes</p>
 <h1>O mistério das peças trocadas</h1>
-<p class="intro">Três tamanhos, uma mesma regra. Quais posições podem chegar à meta por movimentos válidos?</p>
+<p class="intro">Sete tamanhos, uma mesma regra. Quais posições podem chegar à meta por movimentos válidos?</p>
 <div class="layout">
 <section class="card play" aria-labelledby="board-title">
 <h2 id="board-title">Tabuleiro deslizante</h2>
 <div class="row">
-<label for="size">Tamanho</label><select id="size"><option value="3">3 × 3</option><option value="4">4 × 4</option><option value="5">5 × 5</option></select>
-<label for="level">Nível</label><select id="level"><option value="a">A · Introdução</option><option value="medium">Intermediário</option><option value="hard">Avançado</option><option value="b">B · Peças trocadas</option></select>
+<label for="size">Tamanho</label><select id="size"><option value="3">3 × 3</option><option value="4">4 × 4</option><option value="5">5 × 5</option><option value="6">6 × 6</option><option value="7">7 × 7</option><option value="8">8 × 8</option><option value="9">9 × 9</option></select>
+<label for="level">Nível</label><select id="level"><option value="a">A · Introdução</option><option value="medium">Intermediário</option><option value="hard">Avançado</option><option value="b">B · Investigar impossibilidade</option></select>
 </div>
 <div class="board" id="board" role="group"></div>
 <p id="goal-text"></p>
 <p>Toque em uma peça vizinha do vazio ou use as setas enquanto o foco estiver no tabuleiro. As setas movem o espaço vazio.</p>
-<div class="row"><button id="reset">Reiniciar desafio</button><span id="moves"></span></div>
+<div class="row"><button id="reset">Embaralhar e reiniciar</button><button id="classic" hidden>Reproduzir posição clássica</button><span id="moves"></span></div>
 <p class="status" id="status" role="status"></p>
 </section>
 <section class="card" aria-label="Roteiro da investigação">
 <nav class="row" aria-label="Etapas"><button data-stage="jogar" aria-pressed="true">Jogar</button><button data-stage="investigar" aria-pressed="false">Investigar</button><button data-stage="explicar" aria-pressed="false">Explicar</button></nav>
 <div id="jogar">
 <h2>Você consegue resolver os dois?</h2>
-<p>Comece pelo nível A. Depois, escolha o nível B e compare as duas últimas peças numeradas com a meta. Repita a investigação em 4 × 4 e 5 × 5.</p>
+<p>Comece pelo nível A. Cada reinício gera uma posição diferente da anterior. No nível B, use “Reproduzir posição clássica” para investigar o caso que só troca as duas últimas peças numeradas.</p>
 <p>Se você ficar preso no desafio B, pense no que poderia distinguir uma tarefa difícil de uma tarefa impossível.</p>
 <button data-next="investigar">Começar a investigação</button>
+<p><a href="#minimos">Investigar movimentos mínimos</a></p>
 </div>
 <div id="investigar" hidden>
 <h2>O que muda a cada movimento?</h2>
@@ -54,24 +55,37 @@
 <div id="metrics" class="metrics" hidden><div id="counts"></div><div id="invariant"></div><div id="pairs"></div></div>
 <p>Faça um movimento horizontal e depois um vertical. Compare as contagens e procure algo que permanece.</p>
 <details><summary>Pista sobre o movimento horizontal</summary><p>Escreva a sequência antes e depois. Ignorando o vazio, algum par de peças numéricas mudou de ordem?</p></details>
-<details><summary>Pista sobre o movimento vertical</summary><p>Na ordem de leitura, quantas peças numeradas a peça movida atravessa? Compare a quantidade de peças atravessadas nos tabuleiros de larguras 3, 4 e 5.</p></details>
+<details><summary>Pista sobre o movimento vertical</summary><p>Na ordem de leitura, quantas peças numeradas a peça movida atravessa? Compare n − 1 em tabuleiros de largura par e ímpar.</p></details>
 <button data-next="explicar">Registrar minha explicação</button>
 </div>
 <div id="explicar" hidden>
 <h2>Escreva sua justificativa</h2>
-<label for="notes">Que propriedade permanece neste tamanho e o que ela diz sobre o nível B?</label>
+<label for="notes">Registre sua conjectura para este tamanho e justifique-a com os limites, exemplos ou o invariante.</label>
 <textarea id="notes" placeholder="Minha conjectura é que…"></textarea>
 <p id="saved" role="status">O registro fica neste navegador quando o armazenamento local está disponível.</p>
 <details><summary>Abrir a demonstração comentada</summary>
 <p>Em qualquer tamanho, um movimento horizontal mantém a ordem dos números. Num movimento vertical em um tabuleiro de largura n, a peça cruza n − 1 peças na leitura. Cada cruzamento altera a contagem de inversões em +1 ou −1.</p>
-<p><strong>3 × 3 e 5 × 5.</strong> A peça cruza duas ou quatro outras numa jogada vertical. Como esse número é par, a paridade da contagem de inversões se conserva.</p>
-<p><strong>4 × 4.</strong> A peça cruza três outras numa jogada vertical. A paridade das inversões muda e a do número da linha do vazio, contado de baixo para cima a partir de 1, também muda. Portanto a paridade da soma se conserva. Um movimento horizontal mantém os dois termos.</p>
+<p><strong>Largura ímpar.</strong> Uma jogada vertical cruza n − 1 peças, um número par. Logo, a paridade das inversões se conserva.</p>
+<p><strong>Largura par.</strong> A peça cruza um número ímpar de outras peças numa jogada vertical. A paridade das inversões muda e a do número da linha do vazio, contado de baixo para cima a partir de 1, também muda. Portanto a paridade da soma se conserva. Um movimento horizontal mantém os dois termos.</p>
 <p id="impossible-proof"></p>
 </details>
 <details><summary>Conexão com permutações</summary><p>Cada jogada troca duas posições, a da peça e a do vazio. Contando o vazio como uma peça, toda jogada alterna a paridade da permutação e a cor da casa do vazio em um tabuleiro quadriculado. Essas duas alternâncias se compensam. Trocar as duas últimas peças numeradas muda somente a paridade da permutação. Explore a composição de trocas no <a href="fundamentos.html#grupos">módulo de grupos</a>.</p></details>
 </div>
 </section>
 </div>
+<section class="card teacher" id="minimos" aria-labelledby="minimos-title">
+<h2 id="minimos-title">Laboratório de movimentos mínimos</h2>
+<p>Para uma posição inicial P em um tabuleiro n × n, chame de m(P) o menor número de jogadas até a meta. Compare várias posições do mesmo tamanho.</p>
+<p id="bounds" class="metrics" role="status"></p>
+<div class="row"><button id="exact" type="button">Calcular mínimo exato no 3 × 3</button><button id="record-run" type="button">Registrar esta posição</button></div>
+<p id="record-status" role="status"></p>
+<div id="samples"></div>
+<details><summary>Como justificar os limites e formular a conjectura?</summary>
+<p>Some, para cada peça numerada, a diferença de linhas e a diferença de colunas até seu destino, sempre em valor absoluto. Essa é a distância Manhattan total D(P), sem contar o vazio. Cada jogada altera D em exatamente 1, logo D(P) ≤ m(P).</p>
+<p>Desfazer um embaralhamento de k jogadas fornece uma solução com k passos. Qualquer solução que você encontrar também dá um limite superior. Se os limites coincidirem, o mínimo está demonstrado. No 3 × 3, a busca exata percorre limites crescentes e elimina caminhos cujo comprimento mais a distância Manhattan já excede o limite.</p>
+<p>Compare duas posições do mesmo tamanho. Uma conjectura possível é “m(P) = D(P) para toda posição solúvel”. Que exemplo a apoia? Que posição poderia refutá-la? Para propor outra fórmula, defina as variáveis, indique quando vale e registre os dados na aba <strong>Explicar</strong>.</p>
+</details>
+</section>
 <section class="card teacher">
 <details><summary>Guia para o professor</summary>
 <p><strong>Público e duração sugeridos</strong> · Anos finais do Ensino Fundamental, com aprofundamento para o Ensino Médio. Reserve 25 a 35 minutos.</p>
@@ -108,11 +122,15 @@ const size = () => state.size;
 const key = () => size() + '-' + state.level;
 const goal = () => Array.from({length:size() ** 2}, (_,i) => (i + 1) % (size() ** 2));
 let initialTiles = [];
+state.games ??= {};
+state.notes ??= {};
+state.samples ??= {};
+const levelNames = {a:'Introdução',medium:'Intermediário',hard:'Avançado',b:'Impossibilidade'};
 function adjacent(a,b) {
   const n = size();
   return Math.abs(Math.floor(a / n) - Math.floor(b / n)) + Math.abs(a % n - b % n) === 1;
 }
-function start() {
+function legacyStart() {
   const values = goal();
   const last = values.length - 1;
   if (state.level === 'b') {
@@ -135,6 +153,68 @@ function start() {
   }
   return values;
 }
+function distance(a,b) {
+  const n = size();
+  return Math.abs(Math.floor(a/n) - Math.floor(b/n)) + Math.abs(a%n - b%n);
+}
+function manhattan(values) {
+  return values.reduce((total, number, i) => total + (number ? distance(i,number-1) : 0), 0);
+}
+function shuffledGame(previous) {
+  const seed = state.level === 'b' ? legacyStart() : goal();
+  const steps = {a:4,medium:12,hard:size()*4+7,b:9}[state.level];
+  let values;
+  do {
+    values = [...seed];
+    let space = values.indexOf(0);
+    let last = -1;
+    const visited = new Set([space]);
+    for (let j = 0; j < steps; j++) {
+      const options = values.map((_,i) => i).filter(i =>
+        i !== last && adjacent(i,space) && (state.level !== 'a' || !visited.has(i)));
+      if (!options.length) break;
+      const next = options[Math.floor(Math.random() * options.length)];
+      [values[space],values[next]] = [values[next],values[space]];
+      last = space;
+      space = next;
+      visited.add(space);
+    }
+  } while (values.join() === seed.join() || values.join() === previous?.join() ||
+    values.join() === goal().join() || (state.level === 'a' && manhattan(values) !== steps));
+  return {tiles:[...values], initial:values, moves:0, upper:state.level === 'b' ? null : steps};
+}
+function loadGame() {
+  const current = state.games[key()];
+  if (!current) return shuffledGame();
+  if (!current.initial) {
+    current.initial = legacyStart();
+    current.upper = {a:4,medium:11,hard:23,b:null}[state.level];
+  }
+  return current;
+}
+function exactDistance(start, maximum) {
+  const values = [...start];
+  const neighbors = values.map((_, i) => values.map((_,j) => j).filter(j => adjacent(i,j)));
+  function search(space, previous, depth, threshold, estimate) {
+    if (depth + estimate > threshold) return false;
+    if (estimate === 0) return true;
+    for (const next of neighbors[space]) {
+      if (next === previous) continue;
+      const piece = values[next];
+      const updated = estimate + distance(space,piece-1) - distance(next,piece-1);
+      [values[space],values[next]] = [values[next],values[space]];
+      const found = search(next,space,depth+1,threshold,updated);
+      [values[space],values[next]] = [values[next],values[space]];
+      if (found) return true;
+    }
+    return false;
+  }
+  const lower = manhattan(values);
+  for (let limit = lower; limit <= maximum; limit += 2) {
+    if (search(values.indexOf(0),-1,0,limit,lower)) return limit;
+  }
+  return null;
+}
 const game = () => state.games[key()];
 function inversions(tiles) {
   const values = tiles.filter(Boolean);
@@ -146,6 +226,7 @@ let tiles = [];
 function buildBoard() {
   const board = $('board');
   board.replaceChildren();
+  board.dataset.size = size();
   board.style.gridTemplateColumns = 'repeat(' + size() + ', minmax(0, 1fr))';
   board.setAttribute('aria-label', 'Tabuleiro de ' + size() + ' por ' + size());
   tiles = goal().map((_,i) => {
@@ -177,7 +258,8 @@ function render() {
   $('invariant').textContent = evenWidth
     ? 'Linha do vazio a partir de baixo: ' + row + '. Paridade da soma (inversões + linha): início ' + parity(initial + bottomRow(initialTiles)) + ' · agora ' + parity(current.length + row) + ' · meta ímpar.'
     : 'Invariante: paridade das inversões.';
-  $('pairs').textContent = current.length ? 'Pares invertidos: ' + current.map(pair => '(' + pair.join(', ') + ')').join(', ') : 'Nenhum par invertido.';
+  $('pairs').textContent = current.length ? 'Pares invertidos: ' + current.slice(0,12).map(pair => '(' + pair.join(', ') + ')').join(', ') + (current.length > 12 ? ' e outros ' + (current.length - 12) + ' pares.' : '') : 'Nenhum par invertido.';
+  renderBounds();
 }
 function move(i) {
   const values = game().tiles;
@@ -189,6 +271,7 @@ function move(i) {
   const piece = values[i];
   [values[i],values[space]] = [values[space],values[i]];
   game().moves++;
+  if (solved()) game().upper = Math.min(game().upper ?? Infinity, game().moves);
   render();
   $('status').textContent = solved() ? 'Tabuleiro resolvido!' : 'Peça ' + piece + ' movida.';
   save();
@@ -202,18 +285,21 @@ $('board').addEventListener('keydown', event => {
 function selectGame() {
   state.size = Number($('size').value);
   state.level = $('level').value;
-  initialTiles = start();
-  state.games[key()] ??= {tiles:[...initialTiles], moves:0};
+  state.games[key()] = loadGame();
+  initialTiles = game().initial;
+  $('classic').hidden = state.level !== 'b';
+  $('record-status').textContent = '';
   buildBoard();
   const last = size() ** 2 - 1;
   $('goal-text').textContent = 'Ordene as peças de 1 a ' + last + ' por linhas. Deixe o vazio no último espaço.';
   const reason = size() % 2
     ? 'O nível B tem uma inversão (ímpar) e a meta tem zero (par).'
     : 'O nível B tem uma inversão e o vazio está na linha 1, dando soma 2 (par). A meta tem zero inversões e o vazio na linha 1, dando soma 1 (ímpar).';
-  $('impossible-proof').textContent = 'No ' + size() + ' × ' + size() + ', as peças ' + (last-1) + ' e ' + last + ' estão trocadas no nível B. ' + reason + ' Como a paridade do invariante é diferente, nenhuma sequência de jogadas pode chegar à meta.';
+  $('impossible-proof').textContent = 'Na posição clássica do ' + size() + ' × ' + size() + ', as peças ' + (last-1) + ' e ' + last + ' estão trocadas no nível B. ' + reason + ' Como a paridade do invariante é diferente, nenhuma sequência de jogadas pode chegar à meta. As posições aleatórias do nível B são obtidas por jogadas válidas a partir dessa posição e conservam o mesmo invariante.';
   $('status').textContent = solved() ? 'Tabuleiro resolvido!' : '';
   $('notes').value = state.notes[size()] ?? '';
   render();
+  renderSamples();
 }
 for (const id of ['size','level']) {
   $(id).addEventListener('change', () => {
@@ -222,9 +308,67 @@ for (const id of ['size','level']) {
   });
 }
 $('reset').addEventListener('click', () => {
-  state.games[key()] = {tiles:[...initialTiles], moves:0};
-  $('status').textContent = 'Tabuleiro reiniciado.';
-  render();
+  state.games[key()] = shuffledGame(initialTiles);
+  selectGame();
+  $('status').textContent = 'Nova posição embaralhada.';
+  save();
+});
+$('classic').addEventListener('click', () => {
+  const initial = legacyStart();
+  state.games[key()] = {tiles:[...initial],initial,moves:0,upper:null};
+  selectGame();
+  $('status').textContent = 'Posição clássica carregada.';
+  save();
+});
+function renderBounds() {
+  const lower = manhattan(initialTiles);
+  const {upper,exact} = game();
+  const label = exact ?? (lower === upper ? lower : null);
+  $('bounds').textContent = state.level === 'b'
+    ? 'Posição inicial impossível: não existe número finito de jogadas até a meta.'
+    : 'Limite inferior: ' + lower + ' · Limite superior: ' + upper + ' · ' +
+      (label === null ? 'Mínimo ainda não determinado.' : 'Mínimo comprovado: ' + label + '.') +
+      ' Distância Manhattan atual: ' + manhattan(game().tiles) + '.';
+  $('exact').disabled = size() !== 3 || state.level === 'b' || label !== null;
+}
+function renderSamples() {
+  const entries = state.samples[size()] ?? [];
+  const list = document.createElement('ol');
+  for (const entry of entries) {
+    const item = document.createElement('li');
+    item.textContent = entry.summary;
+    const position = document.createElement('details');
+    const summary = document.createElement('summary');
+    summary.textContent = 'Posição inicial';
+    position.append(summary);
+    for (let i = 0; i < entry.initial.length; i += size()) {
+      const row = document.createElement('div');
+      row.textContent = entry.initial.slice(i,i+size()).map(n => n || '□').join(' · ');
+      position.append(row);
+    }
+    item.append(position);
+    list.append(item);
+  }
+  const samples = $('samples');
+  samples.replaceChildren();
+  if (entries.length) samples.append(list);
+}
+$('exact').addEventListener('click', () => {
+  game().exact = exactDistance(initialTiles,game().upper);
+  if (game().exact !== null) game().upper = game().exact;
+  renderBounds();
+  save();
+});
+$('record-run').addEventListener('click', () => {
+  const entries = state.samples[size()] ??= [];
+  const {moves} = game();
+  const sample = {initial:[...initialTiles], summary:levelNames[state.level] + ' · ' + $('bounds').textContent + ' Jogadas na tentativa: ' + moves + '.'};
+  const index = entries.findIndex(entry => entry.initial.join() === initialTiles.join());
+  if (index >= 0) entries[index] = sample;
+  else entries.unshift(sample);
+  if (entries.length > 15) entries.pop();
+  $('record-status').textContent = 'Registro salvo neste tamanho. São mantidas até 15 posições por tamanho.';
+  renderSamples();
   save();
 });
 const stages = document.querySelectorAll('[data-stage]');
@@ -253,5 +397,6 @@ $('notes').addEventListener('input', () => {
   save();
 });
 selectGame();
+save();
 </script>
 </html>

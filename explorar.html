@@ -51,12 +51,12 @@
 <div class="layout">
 <section class="card play experiment">
 <h2>Transforme a figura</h2>
-<div class="row"><label for="shape">Figura</label><select id="shape"><option value="square">Quadrado</option><option value="rectangle">Retângulo não quadrado</option><option value="flag">Bandeira assimétrica</option></select></div>
+<div class="row"><label for="shape">Figura</label><select id="shape"><option value="square">Quadrado</option><option value="rectangle">Retângulo não quadrado</option><option value="triangle">Triângulo equilátero</option><option value="isosceles">Triângulo isósceles não equilátero</option><option value="pentagon">Pentágono regular</option><option value="hexagon">Hexágono regular</option><option value="octagon">Octógono regular</option><option value="star">Estrela de cinco pontas</option><option value="parallelogram">Paralelogramo oblíquo</option><option value="flag">Bandeira assimétrica</option></select></div>
 <div class="comparison">
 <figure><canvas id="original" width="240" height="240" role="img" aria-label="Figura original"></canvas><figcaption>Original</figcaption></figure>
 <figure><canvas id="transformed" width="240" height="240" role="img" aria-label="Figura transformada"></canvas><figcaption>Transformada</figcaption></figure>
 </div>
-<div class="row"><button id="rotate">Girar 90°</button><button id="reflect">Refletir no eixo vertical</button><button id="reset-shape">Reiniciar</button></div>
+<div class="row"><label for="turn">Ângulo de giro</label><select id="turn"><option>30</option><option>36</option><option>45</option><option>60</option><option>72</option><option selected>90</option><option>120</option><option>180</option></select><button id="rotate">Girar 90°</button><button id="reflect">Refletir no eixo vertical</button><button id="reset-shape">Reiniciar</button></div>
 <p id="symmetry" class="status" role="status"></p>
 </section>
 <section class="card">
@@ -65,7 +65,7 @@
 <label for="note-simetrias">Por que duas figuras podem ter algumas simetrias em comum e outras diferentes?</label>
 <textarea id="note-simetrias" data-note></textarea>
 <details><summary>Pista</summary><p>Depois de um quarto de volta, observe o que aconteceu com o lado mais comprido do retângulo. Depois de meia volta, compare novamente.</p></details>
-<details><summary>Explicação</summary><p>O quadrado coincide consigo mesmo nos giros de 0°, 90°, 180° e 270°. O retângulo não quadrado coincide nos giros de 0° e 180°. Ambos coincidem após uma reflexão vertical a partir da posição inicial. A bandeira foi desenhada para distinguir a posição inicial de qualquer outra transformação produzida pelos controles.</p></details>
+<details><summary>Explicação</summary><p>O quadrado coincide consigo mesmo nos giros de 0°, 90°, 180° e 270°. O retângulo não quadrado coincide nos giros de 0° e 180°. Ambos coincidem após uma reflexão vertical a partir da posição inicial. Nos polígonos regulares de n lados, o menor giro positivo que preserva a figura é 360° ÷ n. Teste 120°, 72°, 60° e 45° no triângulo equilátero, pentágono, hexágono e octógono. A estrela de cinco pontas também se repete a cada 72°. Compare com o paralelogramo oblíquo, que retorna após 180°, e procure eixos no triângulo isósceles.</p></details>
 <details><summary>Para o professor</summary><p>Desafie a turma a produzir uma reflexão horizontal combinando o giro de 180° e a reflexão vertical. Peça uma justificativa usando a posição de um ponto da figura.</p></details>
 </section>
 </div>
@@ -76,10 +76,11 @@
 <div class="layout">
 <section class="card play experiment">
 <h2>Percorra a rede</h2>
-<div class="row"><label for="network">Rede</label><select id="network"><option value="0">Circuito de quatro vértices</option><option value="1">Circuito com uma diagonal</option><option value="2">Circuito com duas diagonais</option><option value="3">Rede com cinco vértices</option><option value="4">Dois circuitos unidos</option></select></div>
+<div class="row"><label for="network">Rede</label><select id="network"><option value="0">Circuito de quatro vértices</option><option value="1">Circuito com uma diagonal</option><option value="2">Circuito com duas diagonais</option><option value="3">Rede com cinco vértices</option><option value="4">Dois circuitos unidos</option><option value="5">Sete Pontes de Königsberg</option></select></div>
 <canvas id="graph" width="480" height="300" role="img" aria-label="Rede de vértices e arestas"></canvas>
 <p class="status" id="edges"></p>
 <div class="row" id="vertices" aria-label="Vértices"></div>
+<div class="row" id="bridges" aria-label="Pontes disponíveis"></div>
 <div class="row"><button id="undo">Desfazer</button><button id="reset-graph">Reiniciar percurso</button></div>
 <p id="route" class="status" role="status"></p>
 <p id="degrees" class="status"></p>
@@ -90,7 +91,13 @@
 <label for="note-grafos">Como o grau ajuda a escolher onde começar? Quando o percurso pode terminar no ponto de partida?</label>
 <textarea id="note-grafos" data-note></textarea>
 <details><summary>Pista</summary><p>Em um vértice intermediário, cada chegada precisa ser acompanhada de uma saída. Em quais vértices uma chegada ou saída pode ficar sem par?</p></details>
-<details><summary>Explicação</summary><p>Em uma rede conexa como as três desta atividade, um percurso que usa cada aresta exatamente uma vez existe quando há zero ou dois vértices de grau ímpar. Com zero, o percurso pode começar e terminar no mesmo vértice. Com dois, eles precisam ser o início e o fim. Com quatro, o percurso é impossível, pois cada vértice de grau ímpar precisaria ser uma extremidade.</p></details>
+<details><summary>Explicação</summary><p>Em uma rede conexa como as desta atividade, um percurso que usa cada aresta exatamente uma vez existe quando há zero ou dois vértices de grau ímpar. Com zero, o percurso pode começar e terminar no mesmo vértice. Com dois, eles precisam ser o início e o fim. Com quatro, o percurso é impossível, pois cada vértice de grau ímpar precisaria ser uma extremidade.</p></details>
+<details id="historico-pontes"><summary>As Sete Pontes e a origem da teoria dos grafos</summary>
+<p>Em Königsberg, hoje Kaliningrado, sete pontes ligavam quatro porções de terra separadas pelo rio Pregel. A pergunta era se alguém podia atravessar cada ponte exatamente uma vez, com liberdade para escolher onde começar e terminar.</p>
+<p>Na década de 1730, Leonhard Euler resolveu o problema analisando só quais regiões cada ponte unia. Na linguagem de hoje, as regiões são vértices e as pontes são arestas. Duas pontes entre as mesmas regiões continuam sendo duas arestas distintas. Essa abstração é um marco da origem da teoria dos grafos.</p>
+<p>Um vértice intermediário precisa emparelhar cada chegada com uma saída. Apenas o início e o fim podem ter grau ímpar. Em Königsberg, os graus são 5, 3, 3 e 3. Com quatro vértices ímpares, o passeio é impossível, mesmo podendo terminar em outro lugar.</p>
+<p>Fonte histórica e esquema das pontes: <a href="https://www.cs.princeton.edu/courses/archive/spring18/cos226/lectures/41UndirectedGraphs.pdf">Princeton University, Undirected Graphs</a>.</p>
+</details>
 <details><summary>Aprofundamento · por que a condição é suficiente?</summary><p>Se todos os graus são pares, comece a caminhar por arestas novas. Ao chegar a um vértice diferente do inicial, a chegada deixa pelo menos uma saída disponível, por causa da paridade. Assim, o primeiro percurso que não pode prosseguir fecha no início. Se sobraram arestas, a conexidade garante um vértice desse circuito ligado a uma aresta ainda não usada. A partir dele, construa outro circuito com as sobras e encaixe-o no anterior. Repita até usar todas as arestas. Se há exatamente dois vértices ímpares, acrescente temporariamente uma aresta entre eles, mesmo que já exista uma ligação. Construa um circuito e remova a aresta extra para abrir o percurso entre os dois vértices.</p></details>
 <details><summary>Para o professor</summary><p>Peça à turma que compare o efeito de acrescentar a primeira e a segunda diagonal. Em cada caso, localizem os dois vértices cujo grau mudou e expliquem por que a paridade deles foi invertida.</p></details>
 </section>

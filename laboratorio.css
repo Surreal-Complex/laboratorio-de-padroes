@@ -25,3 +25,7 @@ figcaption{margin-top:5px}
 #domino-board .removed{visibility:hidden}
 #domino-board .covered{background:#a3d875;color:#162414;opacity:1}
 #domino-board [aria-pressed=true]{outline:3px solid #bc5a00;outline-offset:-4px}
+#board[data-size="6"],#board[data-size="7"],#board[data-size="8"],#board[data-size="9"]{gap:clamp(2px,.65vw,5px);padding:clamp(5px,1vw,10px);max-width:440px}
+#board[data-size="6"] .tile,#board[data-size="7"] .tile,#board[data-size="8"] .tile,#board[data-size="9"] .tile{border-radius:5px;font-size:clamp(.7rem,2.6vw,1.15rem);line-height:1}
+#minimos{overflow-wrap:anywhere}
+#minimos li{margin-top:8px}

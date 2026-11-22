@@ -154,9 +154,19 @@ function exportJournal() {
   }
   const boards = read('laboratorio-padroes-v2', {});
   const legacy = read('laboratorio-padroes-v1', {});
-  for (const n of [3,4,5]) {
+  for (const n of [3,4,5,6,7,8,9]) {
     const note = boards.notes?.[n] ?? (n === 3 ? legacy.notes : '');
+    const samples = boards.samples?.[n] ?? [];
     if (typeof note === 'string' && note.trim()) lines.push('', 'Tabuleiro ' + n + ' × ' + n, note.trim());
+    if (samples.length) {
+      lines.push('', 'Posições investigadas · ' + n + ' × ' + n);
+      for (const sample of samples) {
+        lines.push(sample.summary);
+        for (let i = 0; i < sample.initial.length; i += n) {
+          lines.push(sample.initial.slice(i,i+n).map(value => value || '□').join(' · '));
+        }
+      }
+    }
   }
   const link = document.createElement('a');
   link.href = URL.createObjectURL(new Blob([lines.join('\n') + '\n'], {type:'text/plain;charset=utf-8'}));
