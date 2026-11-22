@@ -2,11 +2,11 @@
 
 const scope = new URL(self.registration.scope);
 const cachePrefix = 'laboratorio-de-padroes:' + scope.pathname + ':';
-const cacheName = cachePrefix + 'v1';
+const cacheName = cachePrefix + 'v2';
 const assets = [
-  './', 'index.html', 'explorar.html', 'fundamentos.html', 'jogos.html',
+  './', 'index.html', 'explorar.html', 'fundamentos.html', 'jogos.html', 'trilhas.html',
   'inicio.css', 'laboratorio.css', 'explorar.js', 'fundamentos.js', 'app.js',
-  'manifest.webmanifest', 'icone-192.png', 'icone-512.png'
+  'manifest.webmanifest', 'icone-192.png', 'icone-512.png', 'trilhas.css', 'trilhas.js'
 ].map(path => new URL(path, scope).href);
 
 self.addEventListener('install', event => {
@@ -18,6 +18,7 @@ self.addEventListener('install', event => {
     }));
     const cache = await caches.open(cacheName);
     await Promise.all(assets.map((url, index) => cache.put(url, responses[index])));
+    await self.skipWaiting();
   })());
 });
 

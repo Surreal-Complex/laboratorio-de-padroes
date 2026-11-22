@@ -1,0 +1,24 @@
+main>h1{font-size:clamp(2.3rem,6vw,4.5rem)}
+main>section{margin-top:32px;scroll-margin-top:18px}
+.intro{max-width:64ch}
+.routes,.review #questions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px;margin-top:14px}
+.panel,fieldset{background:#fff;border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px)}
+h3{margin:0 0 8px;line-height:1.25}
+li+li{margin-top:10px}
+ol,ul{padding-inline-start:1.5em}
+label{display:block}
+.routes label{margin-top:5px;font-weight:650}
+.review fieldset{min-inline-size:0;margin:0}
+.review legend{font-weight:750;padding-inline:6px}
+.review label{display:flex;align-items:baseline;gap:8px;min-height:36px}
+input{accent-color:#245743}
+textarea{display:block;width:100%;resize:vertical;margin-block:5px 8px;padding:10px;border:1px solid #70877e;border-radius:8px;font:inherit}
+textarea:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #c65a0f;outline-offset:3px}
+.action{margin-top:14px;min-height:44px;padding:8px 14px;border:0;border-radius:9px;background:var(--ink);color:white;font:inherit;font-weight:750;cursor:pointer}
+#progress-summary,#journal-status{color:var(--muted)}
+#caderno label{margin-top:12px;font-weight:750}
+.feedback{margin-top:9px;font-weight:650}
+#review-result{margin-top:10px}
+details{margin-block:10px}
+summary{cursor:pointer;font-weight:750}
+@media print{header,.skip,main>h1,main>.intro,main>section:not(#professor),#print-guide{display:none!important}.wrap{width:100%}main{padding:0}#professor{margin:0;border:0;padding:0}body,:root{background:white;color:black}}

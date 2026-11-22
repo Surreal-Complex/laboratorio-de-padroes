@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102c28">
+<title>Trilhas e professor · Laboratório de Padrões</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link rel="stylesheet" href="inicio.css">
+<link rel="stylesheet" href="trilhas.css">
+<script src="app.js" defer></script>
+<script src="trilhas.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<header><div class="wrap top">
+<a class="brand" href="index.html"><span aria-hidden="true">∴</span> Laboratório de Padrões</a>
+<nav aria-label="Navegação das trilhas"><a href="#percursos">Trilhas</a><a href="#desafios">Desafios</a><a href="#caderno">Caderno</a><a href="#professor">Professor</a></nav>
+</div></header>
+<main id="conteudo" class="wrap">
+<h1>Trilhas de investigação</h1>
+<p class="intro">Em cada etapa, teste exemplos, registre uma conjectura e procure um argumento que funcione em todos os casos. Marque as atividades que você concluiu.</p>
+<section id="percursos" aria-labelledby="titulo-percursos">
+<h2 id="titulo-percursos">Escolha por onde começar</h2>
+<div class="routes">
+<article class="panel">
+<h3>Padrões e primeiras justificativas</h3>
+<p>Anos finais do Ensino Fundamental · 2 aulas de 45–50 min</p>
+<ol>
+<li><a href="explorar.html#numeros">Divisibilidade</a>. Compare os retângulos de 12, 13 e 16 pontos. Justifique por que 13 só admite uma fileira, a menos de um giro. <label><input type="checkbox" data-progress="retangulos"> Concluí a investigação de divisibilidade</label></li>
+<li><a href="explorar.html#simetrias">Simetrias</a>. Compare os efeitos de um quarto e de meia volta no quadrado e no retângulo. <label><input type="checkbox" data-progress="simetrias"> Concluí a investigação de simetrias</label></li>
+<li><a href="jogos.html">Tabuleiro 3 × 3</a>. Experimente os níveis A e B. Use um movimento horizontal e um vertical para explicar o que se conserva. <label><input type="checkbox" data-progress="tabuleiro"> Concluí a investigação do tabuleiro</label></li>
+</ol>
+</article>
+<article class="panel">
+<h3>Estruturas e estratégias</h3>
+<p>Ensino Médio · 3 aulas de 45–50 min</p>
+<ol>
+<li><a href="fundamentos.html#algebra">Equações</a> e <a href="fundamentos.html#numeros">algoritmo de Euclides</a>. Em cada atividade, identifique o que permanece depois de uma transformação. <label><input type="checkbox" data-progress="algebra"> Concluí equações e MDC</label></li>
+<li><a href="fundamentos.html#grupos">Permutações</a> e <a href="jogos.html">tabuleiro 4 × 4</a>. Compare a ordem das trocas e explique por que a linha do vazio entra no invariante. <label><input type="checkbox" data-progress="grupos"> Concluí permutações e tabuleiro 4 × 4</label></li>
+<li><a href="explorar.html#grafos">Grafos</a> e <a href="fundamentos.html#jogos">jogo das fichas</a>. Justifique uma impossibilidade na rede e uma estratégia vencedora no jogo. <label><input type="checkbox" data-progress="estrategias"> Concluí grafos e estratégias</label></li>
+</ol>
+</article>
+</div>
+</section>
+<section id="desafios" aria-labelledby="titulo-desafios">
+<h2 id="titulo-desafios">Desafios de revisão</h2>
+<p>Teste suas conclusões. Você pode tentar novamente e ler a justificativa de cada resposta.</p>
+<form id="review" class="review">
+<div id="questions"></div>
+<button type="submit" class="action">Conferir respostas</button>
+<p id="review-result" role="status" tabindex="-1"></p>
+</form>
+<noscript>Ative o JavaScript para responder aos desafios e usar o caderno.</noscript>
+</section>
+<section id="caderno" class="panel" aria-labelledby="titulo-caderno">
+<h2 id="titulo-caderno">Caderno de investigação</h2>
+<p id="progress-summary" role="status"></p>
+<label for="journal">Registre um exemplo, sua conjectura e uma justificativa</label>
+<textarea id="journal" rows="6" placeholder="O que testei? O que observei? Por que isso acontece?"></textarea>
+<p id="journal-status">As anotações ficam neste navegador. Baixe uma cópia para entregar ou guardar.</p>
+<button type="button" id="download-notes" class="action">Baixar meu caderno (.txt)</button>
+</section>
+<section id="professor" class="panel" aria-labelledby="titulo-professor">
+<h2 id="titulo-professor">Guia para o professor</h2>
+<p><strong>Objetivo de aprendizagem.</strong> Formular conjecturas a partir de exemplos e distinguir uma tentativa que falhou de uma demonstração de impossibilidade.</p>
+<ol>
+<li><strong>Abertura (5–10 min).</strong> Apresente a posição com as peças 7 e 8 trocadas. Em duplas, peça uma previsão e uma razão.</li>
+<li><strong>Exploração (15–20 min).</strong> Alterne quem manipula e quem registra. Peça uma comparação entre as contagens antes e depois de movimentos horizontais e verticais.</li>
+<li><strong>Discussão (10–15 min).</strong> Compare argumentos. Pergunte por que testar muitas jogadas não prova que todas falharão. Abra a demonstração depois do debate.</li>
+<li><strong>Fechamento (5 min).</strong> Peça ao estudante que escreva o que permanece, por que permanece e como isso decide o desafio. Use o caderno para recolher essa resposta.</li>
+</ol>
+<details><summary>Critérios para analisar as justificativas</summary>
+<ul><li><strong>Inicial.</strong> Registra uma tentativa ou um exemplo.</li><li><strong>Em desenvolvimento.</strong> Identifica um padrão e explica pelo menos um tipo de movimento.</li><li><strong>Consolidado.</strong> Justifica todos os tipos de movimento e compara o valor do invariante inicial com o da meta.</li></ul>
+</details>
+<details><summary>Adaptações para sala de aula ou exposição</summary>
+<p>Em sala, compare 3 × 3 e 4 × 4 como extensão. Em uma estação da EIMat, use o tabuleiro físico 3 × 3 para a tentativa inicial e o aplicativo para conferir as inversões. Sem conexão, abra o laboratório com antecedência e aguarde a confirmação de disponibilidade offline.</p>
+</details>
+<button type="button" id="print-guide" class="action">Imprimir guia do professor</button>
+</section>
+</main>
+</body>
+</html>
