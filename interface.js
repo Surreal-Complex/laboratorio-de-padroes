@@ -29,6 +29,20 @@ function openDisclosure() {
   const target = document.getElementById(location.hash.slice(1));
   if (target?.tagName === 'DETAILS' && target.classList.contains('home-panel')) target.open = true;
 }
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  if (link.classList.contains('skip')) {
+    const content = document.getElementById('conteudo');
+    event.preventDefault();
+    content.setAttribute('tabindex', '-1');
+    content.focus();
+    content.scrollIntoView();
+    return;
+  }
+  const target = document.getElementById(link.hash.slice(1));
+  if (target?.classList.contains('home-panel')) target.open = true;
+});
 window.addEventListener('hashchange', openDisclosure);
 openDisclosure();
 

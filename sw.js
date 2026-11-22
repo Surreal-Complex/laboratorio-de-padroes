@@ -2,7 +2,7 @@
 
 const scope = new URL(self.registration.scope);
 const cachePrefix = 'laboratorio-de-padroes:' + scope.pathname + ':';
-const cacheName = cachePrefix + 'v4';
+const cacheName = cachePrefix + 'v5';
 const assets = [
   './', 'index.html', 'explorar.html', 'fundamentos.html', 'jogos.html', 'trilhas.html',
   'inicio.css', 'laboratorio.css', 'explorar.js', 'fundamentos.js', 'app.js',
